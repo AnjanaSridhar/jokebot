@@ -13,7 +13,14 @@ def lambda_handler(event, context):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    return {
-        'statusCode': '200',
-        'body': response 
-    }
+    joke = response['joke']
+    if(joke and not joke.isSpace()):
+        return {
+            'statusCode': '200',
+            'body': joke 
+        }
+    else:
+        return {
+            'statusCode': '200',
+            'body': response['setup'] + '/n' + response['delivery'] 
+        }
