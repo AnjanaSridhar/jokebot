@@ -22,5 +22,5 @@ def lambda_handler(event, context):
     else:
         return {
             'statusCode': '200',
-            'body': response['setup'] + '/n' + response['delivery'] 
+            'body': response['setup'] + '/n:thinking_face:/n' + response['delivery'] 
         }
