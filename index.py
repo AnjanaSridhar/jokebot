@@ -3,7 +3,7 @@ import json
 from botocore.vendored import requests
 
 def lambda_handler(event, context):
-    url = "https://jokeapi-v2.p.rapidapi.com/joke/Any"
+    url = "https://jokeapi-v2.p.rapidapi.com/joke/Any?ormat=json&blacklistFlags=racist,nsfw,sexist"
 
     querystring = {"contains":"C%2523","format":"json","blacklistFlags":"nsfw%2Cracist%2Csexist","idRange":"0-150","type":"single%2Ctwopart"}
 
@@ -12,15 +12,15 @@ def lambda_handler(event, context):
         'x-rapidapi-key': "4ba0d14649mshcea34dc896dcaaap11a2f0jsna5e7e39959d6"
         }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    joke = response['joke']
-    if(joke and not joke.isSpace()):
+    response = requests.get(url, headers=headers).json()
+    print(response)
+    if('joke' in response):
         return {
             'statusCode': '200',
-            'body': joke 
+            'body': response['joke']
         }
     else:
         return {
             'statusCode': '200',
-            'body': response['setup'] + '/n:thinking_face:/n' + response['delivery'] 
+            'body': response['setup'] + '\n' + response['delivery'] + ' :wink:'
         }
