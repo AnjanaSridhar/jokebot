@@ -9,7 +9,7 @@ def lambda_handler(event, context):
 
     headers = {
         'x-rapidapi-host': "jokeapi-v2.p.rapidapi.com",
-        'x-rapidapi-key': "4ba0d14649mshcea34dc896dcaaap11a2f0jsna5e7e39959d6"
+        'x-rapidapi-key': "xxx"
         }
 
     response = requests.get(url, headers=headers).json()
